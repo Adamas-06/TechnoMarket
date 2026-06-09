@@ -1,0 +1,3955 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TechnoMarket - Лучшая техника по лучшим ценам</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<style>
+   * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #ff3e6c;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000; /* увеличен z-index для корректного отображения */
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode header {
+            background-color: #1e293b;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-bar {
+            background-color: var(--dark);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode .top-bar {
+            background-color: #0f172a;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: 15px;
+            transition: transform 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+
+        .auth-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .main-header {
+            padding: 15px 0;
+            background-color: white;
+            transition: background-color 0.3s;
+            position: relative;
+            z-index: 1000;
+        }
+
+        body.dark-mode .main-header {
+            background-color: #1e293b;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 600px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 2px solid var(--light-gray);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            background-color: white;
+            color: var(--dark);
+        }
+
+        body.dark-mode .search-bar input {
+            background-color: #334155;
+            border-color: #475569;
+            color: white;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 7px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: var(--primary-dark);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+
+        body.dark-mode .search-results {
+            background: #334155;
+        }
+
+        .search-result-item {
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--light-gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        body.dark-mode .search-result-item {
+            border-bottom-color: #475569;
+        }
+
+        .search-result-item:hover {
+            background: var(--light-gray);
+        }
+
+        body.dark-mode .search-result-item:hover {
+            background: #475569;
+        }
+
+        .search-result-item img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-action {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        body.dark-mode .header-action {
+            color: #e2e8f0;
+        }
+
+        .header-action:hover {
+            color: var(--primary);
+        }
+
+        .header-action i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .cart-count, .wishlist-count, .compare-count {
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+
+        .cart-icon, .wishlist-icon, .compare-icon {
+            position: relative;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary);
+            padding: 10px 0;
+            transition: background-color 0.3s;
+            position: relative;
+            z-index: 1000; /* повышен, чтобы меню было выше */
+        }
+
+        body.dark-mode nav {
+            background-color: #1e40af;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-right: 25px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: opacity 0.3s;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.9;
+        }
+
+        .nav-links a i {
+            margin-right: 8px;
+        }
+
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 5px;
+        }
+
+        /* ========== ИСПРАВЛЕННОЕ ПЛАВАЮЩЕЕ МЕНЮ ========== */
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 9999; /* огромный z-index, чтобы быть поверх всего */
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        body.dark-mode .submenu {
+            background: #334155;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-links li:hover .submenu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .submenu a {
+            color: var(--dark);
+            padding: 10px 20px;
+            display: block;
+            border-bottom: 1px solid var(--light-gray);
+            transition: background 0.2s;
+        }
+
+        body.dark-mode .submenu a {
+            color: #e2e8f0;
+            border-bottom-color: #475569;
+        }
+
+        .submenu a:hover {
+            background: var(--light-gray);
+        }
+
+        body.dark-mode .submenu a:hover {
+            background: #475569;
+        }
+
+        /* Страницы */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* ========== ИСПРАВЛЕННАЯ КАРУСЕЛЬ ========== */
+        .hero {
+            background: linear-gradient(to right, #4f46e5, #7c3aed);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .hero {
+            background: linear-gradient(to right, #3730a3, #5b21b6);
+        }
+
+        .hero-slider {
+            position: relative;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            min-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            pointer-events: none; /* чтобы не мешали кликам по скрытым слайдам */
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+            animation: slideIn 0.8s ease 0.3s both;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #ff2b5e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: slideIn 0.8s ease 0.5s both;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .slider-dot.active {
+            background: white;
+        }
+
+        /* Кнопки навигации карусели */
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 30;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .slider-nav:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-nav.prev {
+            left: 20px;
+        }
+
+        .slider-nav.next {
+            right: 20px;
+        }
+
+        /* Анимации для карусели */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        /* Categories Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.dark-mode .section-title h2 {
+            color: #e2e8f0;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .categories {
+            padding: 60px 0;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            text-align: center;
+            padding: 30px 20px;
+            cursor: pointer;
+        }
+
+        body.dark-mode .category-card {
+            background: #1e293b;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .category-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(to right, var(--primary), #3b82f6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .category-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .category-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Featured Products */
+        .featured-products {
+            padding: 60px 0;
+            background-color: white;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode .featured-products {
+            background-color: #0f172a;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        body.dark-mode .product-card {
+            background: #1e293b;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: #f9fafb;
+            overflow: hidden;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode .product-image {
+            background-color: #334155;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        body.dark-mode .product-title {
+            color: #e2e8f0;
+        }
+
+        .product-rating {
+            color: #f59e0b;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-rating span {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        body.dark-mode .current-price {
+            color: #e2e8f0;
+        }
+
+        .old-price {
+            font-size: 1rem;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .discount {
+            color: var(--success);
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-to-cart {
+            flex-grow: 1;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .wishlist, .compare-btn {
+            width: 40px;
+            margin-left: 10px;
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode .wishlist,
+        body.dark-mode .compare-btn {
+            background-color: #475569;
+        }
+
+        .wishlist:hover {
+            background-color: #fecaca;
+            color: #ef4444;
+        }
+
+        .compare-btn:hover {
+            background-color: #dbeafe;
+            color: var(--primary);
+        }
+
+        .quick-view {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .quick-view {
+            background: #334155;
+            color: #e2e8f0;
+        }
+
+        .product-card:hover .quick-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Страница корзины */
+        .cart-page {
+            padding: 60px 0;
+        }
+
+        .cart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode .cart-items {
+            background: #1e293b;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 20px;
+            padding: 25px 0;
+            border-bottom: 1px solid var(--light-gray);
+            align-items: center;
+        }
+
+        body.dark-mode .cart-item {
+            border-bottom-color: #475569;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        body.dark-mode .cart-item-image {
+            background: #334155;
+        }
+
+        .cart-item-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .cart-item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cart-item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .cart-item-category {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .cart-item-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        body.dark-mode .quantity-controls {
+            background: #334155;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .remove-from-cart {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .remove-from-cart:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode .cart-summary {
+            background: #1e293b;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        body.dark-mode .summary-title {
+            border-bottom-color: #475569;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        body.dark-mode .summary-row {
+            border-bottom-color: #475569;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 20px 0;
+            padding-top: 20px;
+            border-top: 2px solid var(--light-gray);
+        }
+
+        body.dark-mode .summary-total {
+            border-top-color: #475569;
+        }
+
+        .summary-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .promo-code {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .promo-code input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        body.dark-mode .promo-code input {
+            background: #334155;
+            border-color: #475569;
+            color: white;
+        }
+
+        .promo-code button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-cart i {
+            font-size: 5rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-cart h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .empty-cart p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Страница избранного */
+        .wishlist-page {
+            padding: 60px 0;
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .wishlist-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        body.dark-mode .wishlist-item {
+            background: #1e293b;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .wishlist-item-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            padding: 20px;
+            position: relative;
+        }
+
+        body.dark-mode .wishlist-item-image {
+            background: #334155;
+        }
+
+        .wishlist-item-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .wishlist-item-remove {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            color: var(--danger);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .wishlist-item-remove {
+            background: #334155;
+            color: #ef4444;
+        }
+
+        .wishlist-item-content {
+            padding: 25px;
+        }
+
+        .wishlist-item-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        body.dark-mode .wishlist-item-title {
+            color: #e2e8f0;
+        }
+
+        .wishlist-item-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .wishlist-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .wishlist-item-actions .btn {
+            flex: 1;
+        }
+
+        .wishlist-item-actions .btn:last-child {
+            background: var(--danger);
+        }
+
+        .wishlist-item-actions .btn:last-child:hover {
+            background: #dc2626;
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-wishlist i {
+            font-size: 5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-wishlist h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .empty-wishlist p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Страница сравнения */
+        .compare-page {
+            padding: 60px 0;
+        }
+
+        .compare-table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode .compare-table-container {
+            background: #1e293b;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .compare-table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+        }
+
+        .compare-table th,
+        .compare-table td {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--light-gray);
+            vertical-align: top;
+        }
+
+        body.dark-mode .compare-table th,
+        body.dark-mode .compare-table td {
+            border-bottom-color: #475569;
+        }
+
+        .compare-table th:first-child {
+            text-align: left;
+            font-weight: 600;
+            width: 200px;
+        }
+
+        .compare-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        .compare-product {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .compare-product-image {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        body.dark-mode .compare-product-image {
+            background: #334155;
+        }
+
+        .compare-product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .compare-product-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .compare-product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .compare-spec {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .compare-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .compare-actions .btn {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .empty-compare {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-compare i {
+            font-size: 5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-compare h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .empty-compare p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        body.dark-mode .modal-content {
+            background: #1e293b;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            z-index: 1;
+        }
+
+        .modal-body {
+            padding: 40px;
+            display: flex;
+            gap: 40px;
+        }
+
+        .modal-image {
+            flex: 1;
+        }
+
+        .modal-image img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .modal-info {
+            flex: 1;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        body.dark-mode .modal-title {
+            color: #e2e8f0;
+        }
+
+        .modal-price {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateX(150%);
+            transition: transform 0.3s;
+            z-index: 3000;
+        }
+
+        body.dark-mode .toast {
+            background: #1e293b;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #e2e8f0;
+            padding: 80px 0 0;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode footer {
+            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column {
+            padding: 0 15px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            color: white;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-right: 15px;
+        }
+
+        .footer-logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-about {
+            color: #94a3b8;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .contact-info-footer {
+            list-style: none;
+            margin-top: 25px;
+        }
+
+        .contact-info-footer li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #94a3b8;
+        }
+
+        .contact-info-footer i {
+            width: 30px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .contact-info-footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info-footer a:hover {
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .footer-links li:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-links i {
+            width: 20px;
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .footer-payment-methods {
+            margin-top: 25px;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .payment-method {
+            width: 50px;
+            height: 30px;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.8rem;
+        }
+
+        .footer-newsletter {
+            margin-top: 25px;
+        }
+
+        .footer-newsletter p {
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-form-footer {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-form-footer input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+            outline: none;
+            background: #334155;
+            color: white;
+        }
+
+        .newsletter-form-footer button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .newsletter-form-footer button:hover {
+            background: var(--primary-dark);
+        }
+
+        .social-links-footer {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-link-footer {
+            width: 45px;
+            height: 45px;
+            background: #334155;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-link-footer:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .copyright {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer-legal-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-legal-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-legal-links a:hover {
+            color: white;
+        }
+
+        .footer-app-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .app-link {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .app-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .app-link i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .app-link-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-link-text span:first-child {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .app-link-text span:last-child {
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-legal-links {
+                justify-content: center;
+            }
+            
+            .newsletter-form-footer {
+                flex-direction: column;
+            }
+            
+            .newsletter-form-footer input,
+            .newsletter-form-footer button {
+                width: 100%;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+        
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1);}
+            50% { transform: scale(1.05);}
+        }
+        
+        .btn:hover {
+            animation: pulse 0.6s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 60%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            80% { transform: translateY(-5px); }
+        }
+
+        .animate-bounce {
+            animation: bounce 0.5s;
+        }
+</style>
+</head>
+<body>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">
+    <div class="toast-icon">
+        <i class="fas fa-check"></i>
+    </div>
+    <div>
+        <div class="toast-title">Товар добавлен в корзину!</div>
+        <div class="toast-message">Перейдите в корзину для оформления заказа</div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="productModal">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-body" id="modalBody">
+            <!-- Modal content will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<!-- Back to Top Button -->
+<div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<!-- Loading Spinner -->
+<div class="loading-spinner" id="loadingSpinner"></div>
+
+<!-- Header -->
+<header class="top-bar fade-in">
+    <div class="container top-bar-content">
+        <div class="contact-info">
+            <a href="tel:78001234567"><i class="fas fa-phone"></i> 7 800 123-45-67</a>
+            <a href="mailto:info@technomarket.ru"><i class="fas fa-envelope"></i> info@technomarket.ru</a>
+        </div>
+        <div class="auth-links">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="#" id="loginBtn"><i class="fas fa-user"></i> Войти</a>
+            <a href="#" id="registerBtn"><i class="fas fa-user-plus"></i> Регистрация</a>
+        </div>
+    </div>
+</header>
+
+<div class="main-header fade-in">
+    <div class="container header-content">
+        <div class="logo" id="logo">
+            <i class="fas fa-laptop"></i>
+            <span>TechnoMarket</span>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Поиск по товарам и категориям..." id="searchInput" />
+            <button id="searchBtn"><i class="fas fa-search"></i></button>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+        <div class="header-actions">
+            <div class="header-action compare-icon" id="compareBtn">
+                <i class="fas fa-exchange-alt"></i>
+                <span>Сравнение</span>
+                <div class="compare-count" id="compareCount">0</div>
+            </div>
+            <div class="header-action wishlist-icon" id="wishlistBtn">
+                <i class="fas fa-heart"></i>
+                <span>Избранное</span>
+                <div class="wishlist-count" id="wishlistCount">0</div>
+            </div>
+            <div class="header-action cart-icon" id="cartBtn">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Корзина</span>
+                <div class="cart-count" id="cartCount">0</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="nav fade-in">
+    <div class="container">
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Главная</a></li>
+            <li>
+                <a href="#"><i class="fas fa-tv"></i> Телевизоры <i class="fas fa-chevron-down"></i></a>
+                <div class="submenu">
+                    <a href="#">4K Телевизоры</a>
+                    <a href="#">Smart TV</a>
+                    <a href="#">OLED Телевизоры</a>
+                    <a href="#">До 50 дюймов</a>
+                </div>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-laptop"></i> Ноутбуки <i class="fas fa-chevron-down"></i></a>
+                <div class="submenu">
+                    <a href="#">Игровые ноутбуки</a>
+                    <a href="#">Ультрабуки</a>
+                    <a href="#">Ноутбуки Apple</a>
+                    <a href="#">Ноутбуки до 50 000 ₽</a>
+                </div>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-mobile-alt"></i> Смартфоны <i class="fas fa-chevron-down"></i></a>
+                <div class="submenu">
+                    <a href="#">Apple iPhone</a>
+                    <a href="#">Samsung Galaxy</a>
+                    <a href="#">Смартфоны до 20 000 ₽</a>
+                    <a href="#">Игровые смартфоны</a>
+                </div>
+            </li>
+            <li><a href="#" class="nav-link" data-page="cart"><i class="fas fa-shopping-cart"></i> Корзина</a></li>
+            <li><a href="#" class="nav-link" data-page="wishlist"><i class="fas fa-heart"></i> Избранное</a></li>
+            <li><a href="#" class="nav-link" data-page="compare"><i class="fas fa-exchange-alt"></i> Сравнение</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ========== ИСПРАВЛЕННАЯ ГЛАВНАЯ СТРАНИЦА С КАРУСЕЛЬЮ ========== -->
+<div id="home" class="page active">
+    <section class="hero fade-in animate__animated animate__fadeInDown">
+        <div class="container">
+            <div class="hero-slider" id="heroSlider">
+                <!-- Слайд 1 -->
+                <div class="hero-slide active">
+                    <div class="hero-text">
+                        <h1>Новейшие гаджеты 2024 года</h1>
+                        <p>Откройте для себя мир инновационных технологий с бесплатной доставкой и гарантией 2 года. Скидки до 40% на новинки!</p>
+                        <a href="#" class="btn">Смотреть каталог</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600" alt="Hero image" />
+                    </div>
+                </div>
+                <!-- Слайд 2 -->
+                <div class="hero-slide">
+                    <div class="hero-text">
+                        <h1>Распродажа игровых ноутбуков</h1>
+                        <p>Мощные игровые ноутбуки со скидками до 30%. RTX 40 series, процессоры Intel Core i9, высокий FPS в любых играх!</p>
+                        <a href="#" class="btn">Смотреть предложения</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=600" alt="Gaming Laptop" />
+                    </div>
+                </div>
+                <!-- Слайд 3 -->
+                <div class="hero-slide">
+                    <div class="hero-text">
+                        <h1>Смартфоны премиум-класса</h1>
+                        <p>Флагманские смартфоны с лучшими камерами и производительностью. Рассрочка 0% на 12 месяцев.</p>
+                        <a href="#" class="btn">Выбрать смартфон</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600" alt="Smartphones" />
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls" id="sliderControls">
+                <div class="slider-dot active" data-slide="0"></div>
+                <div class="slider-dot" data-slide="1"></div>
+                <div class="slider-dot" data-slide="2"></div>
+            </div>
+            <!-- Кнопки навигации карусели -->
+            <button class="slider-nav prev" id="prevSlide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-nav next" id="nextSlide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <section class="categories fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>Популярные категории</h2>
+            </div>
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-products fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>Хиты продаж</h2>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded via JS -->
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Страница корзины -->
+<div id="cart" class="page">
+    <section class="cart-page fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>Корзина покупок</h2>
+            </div>
+            
+            <div id="cartContent">
+                <!-- Cart content will be loaded here -->
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Страница избранного -->
+<div id="wishlist" class="page">
+    <section class="wishlist-page fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>Избранные товары</h2>
+            </div>
+            
+            <div id="wishlistContent">
+                <!-- Wishlist content will be loaded here -->
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Страница сравнения -->
+<div id="compare" class="page">
+    <section class="compare-page fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>Сравнение товаров</h2>
+            </div>
+            
+            <div id="compareContent">
+                <!-- Compare content will be loaded here -->
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="fade-in">
+    <div class="container">
+        <div class="footer-content">
+            <!-- Колонка 1: О компании -->
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <i class="fas fa-laptop"></i>
+                    <div class="footer-logo-text">TechnoMarket</div>
+                </div>
+                <p class="footer-about">
+                    Ведущий онлайн-магазин электроники и техники в России с 2010 года. 
+                    Мы предлагаем широкий ассортимент качественной продукции по лучшим ценам 
+                    с гарантией и бесплатной доставкой.
+                </p>
+                <ul class="contact-info-footer">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Москва, ул. Техническая, 15</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:78001234567">7 800 123-45-67</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:info@technomarket.ru">info@technomarket.ru</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Пн-Пт: 9:00-21:00, Сб-Вс: 10:00-20:00</span>
+                    </li>
+                </ul>
+                <div class="social-links-footer">
+                    <a href="#" class="social-link-footer">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                    <a href="#" class="social-link-footer">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="social-link-footer">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-link-footer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Колонка 2: Категории -->
+            <div class="footer-column">
+                <h3>Категории</h3>
+                <ul class="footer-links">
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Смартфоны и планшеты
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Ноутбуки и компьютеры
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Телевизоры и аудио
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Фото и видеотехника
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Игры и консоли
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Умный дом и гаджеты
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Аксессуары и периферия
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Колонка 3: Покупателям -->
+            <div class="footer-column">
+                <h3>Покупателям</h3>
+                <ul class="footer-links">
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Доставка и оплата
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Гарантия и возврат
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Рассрочка и кредит
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Бонусная программа
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Промокоды и акции
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Сервисные центры
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            FAQ и помощь
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer-payment-methods">
+                    <h4>Способы оплаты</h4>
+                    <div class="payment-methods">
+                        <div class="payment-method">VISA</div>
+                        <div class="payment-method">MC</div>
+                        <div class="payment-method">МИР</div>
+                        <div class="payment-method">QIWI</div>
+                        <div class="payment-method">Я.Д</div>
+                        <div class="payment-method">СБП</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Колонка 4: Подписка -->
+            <div class="footer-column">
+                <h3>Новости и акции</h3>
+                <p>Подпишитесь на рассылку, чтобы первыми узнавать о скидках, новинках и специальных предложениях.</p>
+                <div class="footer-newsletter">
+                    <div class="newsletter-form-footer">
+                        <input type="email" placeholder="Ваш Email" id="footerNewsletterEmail" />
+                        <button type="button" id="footerSubscribeBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <p style="font-size: 0.8rem; margin-top: 10px; color: #64748b;">
+                        Подписываясь, вы соглашаетесь с политикой конфиденциальности
+                    </p>
+                </div>
+                <div class="footer-app-links">
+                    <a href="#" class="app-link">
+                        <i class="fab fa-apple"></i>
+                        <div class="app-link-text">
+                            <span>Загрузите в</span>
+                            <span>App Store</span>
+                        </div>
+                    </a>
+                    <a href="#" class="app-link">
+                        <i class="fab fa-google-play"></i>
+                        <div class="app-link-text">
+                            <span>Доступно в</span>
+                            <span>Google Play</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-content">
+                <div class="copyright">
+                    <p>&copy; 2010-2024 TechnoMarket. Все права защищены.</p>
+                    <p style="margin-top: 5px;">ИНН 1234567890, ОГРН 1234567890123</p>
+                </div>
+                <div class="footer-legal-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Пользовательское соглашение</a>
+                    <a href="#">Юридическая информация</a>
+                    <a href="#">Карта сайта</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ==================== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ====================
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+let compare = JSON.parse(localStorage.getItem('compare')) || [];
+let currentSlide = 0;
+let slideInterval;
+let currentPage = 'home';
+
+// ==================== ДАННЫЕ ====================
+const categories = [
+    { id: 1, name: 'Смартфоны', icon: 'mobile-alt', count: '250+ моделей' },
+    { id: 2, name: 'Ноутбуки', icon: 'laptop', count: 'Для работы и игр' },
+    { id: 3, name: 'Наушники', icon: 'headphones', count: 'Беспроводные и TWS' },
+    { id: 4, name: 'Телевизоры', icon: 'tv', count: '4K и Smart TV' },
+    { id: 5, name: 'Игровые консоли', icon: 'gamepad', count: 'PS5, Xbox, Nintendo' },
+    { id: 6, name: 'Планшеты', icon: 'tablet-alt', count: 'Для всей семьи' },
+    { id: 7, name: 'Смарт-часы', icon: 'clock', count: 'Apple Watch и другие' },
+    { id: 8, name: 'Фототехника', icon: 'camera', count: 'Камеры и объективы' }
+];
+
+const products = [
+    {
+        id: 1,
+        name: 'Apple MacBook Air 13 M1',
+        category: 'Ноутбук',
+        brand: 'Apple',
+        price: 89990,
+        oldPrice: 94990,
+        discount: 5,
+        rating: 4.8,
+        reviews: 132,
+        image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=400',
+        badge: 'Хит',
+        description: 'Ноутбук Apple MacBook Air 13" с процессором Apple M1, 8 ГБ RAM, 256 ГБ SSD. Невероятная производительность и до 18 часов автономной работы.',
+        specs: ['Экран 13.3" Retina', 'Процессор Apple M1', '8 ГБ ОЗУ', '256 ГБ SSD', 'macOS']
+    },
+    {
+        id: 2,
+        name: 'Samsung Galaxy S23 Ultra',
+        category: 'Смартфон',
+        brand: 'Samsung',
+        price: 99990,
+        oldPrice: 119990,
+        discount: 17,
+        rating: 5.0,
+        reviews: 89,
+        image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400',
+        badge: 'Скидка',
+        description: 'Флагманский смартфон Samsung с камерой 200 МП, процессором Snapdragon 8 Gen 2 и аккумулятором 5000 мАч.',
+        specs: ['Экран 6.8" Dynamic AMOLED', 'Процессор Snapdragon 8 Gen 2', '12 ГБ ОЗУ', '512 ГБ памяти', 'Камера 200 МП']
+    },
+    {
+        id: 3,
+        name: 'Sony WH-1000XM5',
+        category: 'Наушники',
+        brand: 'Sony',
+        price: 34990,
+        oldPrice: 39990,
+        discount: 13,
+        rating: 5.0,
+        reviews: 204,
+        image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400',
+        badge: 'Новинка',
+        description: 'Беспроводные наушники с активным шумоподавлением, автономностью до 30 часов и премиальным звуком.',
+        specs: ['Беспроводные', 'Активное шумоподавление', '30 часов работы', 'Bluetooth 5.2', 'Качество звука Hi-Res']
+    },
+    {
+        id: 4,
+        name: 'PlayStation 5 + 2 игры',
+        category: 'Игровая консоль',
+        brand: 'Sony',
+        price: 64990,
+        oldPrice: 69990,
+        discount: 7,
+        rating: 5.0,
+        reviews: 156,
+        image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=400',
+        badge: 'Выбор редакции',
+        description: 'Игровая консоль нового поколения с поддержкой 4K, трассировкой лучей и высокой частотой кадров.',
+        specs: ['825 ГБ SSD', 'Поддержка 4K 120FPS', 'Трассировка лучей', '3D Audio', 'DualSense контроллер']
+    },
+    {
+        id: 5,
+        name: 'Apple iPhone 14 Pro',
+        category: 'Смартфон',
+        brand: 'Apple',
+        price: 109990,
+        oldPrice: 119990,
+        discount: 8,
+        rating: 4.9,
+        reviews: 287,
+        image: 'https://images.unsplash.com/photo-1678911821260-5a8a874d740e?auto=format&fit=crop&w=400',
+        badge: 'Хит',
+        description: 'Смартфон Apple iPhone 14 Pro с динамическим островом, камерой 48 МП и процессором A16 Bionic.',
+        specs: ['Экран 6.1" Super Retina XDR', 'Процессор A16 Bionic', '6 ГБ ОЗУ', '256 ГБ памяти', 'Камера 48 МП']
+    },
+    {
+        id: 6,
+        name: 'Xbox Series X',
+        category: 'Игровая консоль',
+        brand: 'Microsoft',
+        price: 54990,
+        oldPrice: 59990,
+        discount: 8,
+        rating: 4.7,
+        reviews: 94,
+        image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&w=400',
+        badge: 'Акция',
+        description: 'Мощная игровая консоль с поддержкой 4K при 120 FPS, быстрой загрузкой и Game Pass.',
+        specs: ['1 ТБ SSD', '4K при 120 FPS', 'Ray Tracing', 'Quick Resume', 'Game Pass Ultimate']
+    },
+    {
+        id: 7,
+        name: 'Apple Watch Series 8',
+        category: 'Смарт-часы',
+        brand: 'Apple',
+        price: 39990,
+        oldPrice: 44990,
+        discount: 11,
+        rating: 4.8,
+        reviews: 176,
+        image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=400',
+        badge: 'Новинка',
+        description: 'Умные часы Apple Watch Series 8 с датчиками температуры, ЭКГ и мониторингом сна.',
+        specs: ['Экран 45mm Always-On', 'Датчик температуры', 'ЭКГ', 'Кислород в крови', 'Мониторинг сна']
+    },
+    {
+        id: 8,
+        name: 'Samsung Odyssey G9',
+        category: 'Монитор',
+        brand: 'Samsung',
+        price: 129990,
+        oldPrice: 149990,
+        discount: 13,
+        rating: 4.9,
+        reviews: 63,
+        image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=400',
+        badge: 'Премиум',
+        description: 'Игровой монитор 49" с изогнутым экраном, разрешением 5120x1440 и частотой 240 Гц.',
+        specs: ['49" изогнутый экран', '5120x1440 разрешение', '240 Гц', '1ms отклик', 'HDR1000']
+    }
+];
+
+// ==================== ИНИЦИАЛИЗАЦИЯ ====================
+document.addEventListener('DOMContentLoaded', function() {
+    initApp();
+});
+
+function initApp() {
+    initTheme();
+    initCategories();
+    initProducts();
+    initCart();
+    initWishlist();
+    initCompare();
+    initHeroSlider();   // новая функция карусели
+    initEventListeners();
+    initScrollEffects();
+    initFooter();
+    
+    // Показываем главную страницу по умолчанию
+    showPage('home');
+    
+    // Обновляем счетчики
+    updateCounters();
+}
+
+// ==================== УПРАВЛЕНИЕ СТРАНИЦАМИ ====================
+
+function showPage(pageName) {
+    // Скрыть все страницы
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    // Показать выбранную страницу
+    const pageElement = document.getElementById(pageName);
+    if (pageElement) {
+        pageElement.classList.add('active');
+        currentPage = pageName;
+        
+        // Обновить активную ссылку в навигации
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.dataset.page === pageName) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Загрузить контент страницы
+        loadPageContent(pageName);
+    }
+}
+
+function loadPageContent(pageName) {
+    switch(pageName) {
+        case 'home':
+            // Контент главной страницы уже загружен
+            break;
+        case 'cart':
+            loadCartPage();
+            break;
+        case 'wishlist':
+            loadWishlistPage();
+            break;
+        case 'compare':
+            loadComparePage();
+            break;
+    }
+}
+
+// ==================== ГЛАВНАЯ СТРАНИЦА ====================
+
+function initCategories() {
+    const categoriesGrid = document.getElementById('categoriesGrid');
+    categories.forEach(category => {
+        const categoryCard = document.createElement('div');
+        categoryCard.className = 'category-card';
+        categoryCard.innerHTML = `
+            <div class="category-icon">
+                <i class="fas fa-${category.icon}"></i>
+            </div>
+            <h3>${category.name}</h3>
+            <p>${category.count}</p>
+        `;
+        categoryCard.addEventListener('click', () => {
+            showToast(`Категория "${category.name}" выбрана!`, 'info');
+        });
+        categoriesGrid.appendChild(categoryCard);
+    });
+}
+
+function initProducts() {
+    renderProducts(products);
+}
+
+function renderProducts(productsArray) {
+    const productsGrid = document.getElementById('productsGrid');
+    productsGrid.innerHTML = '';
+    
+    productsArray.forEach(product => {
+        const isInWishlist = wishlist.some(item => item.id === product.id);
+        const isInCompare = compare.some(item => item.id === product.id);
+        
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.dataset.id = product.id;
+        
+        productCard.innerHTML = `
+            <div class="product-badge">${product.badge}</div>
+            <button class="quick-view" data-id="${product.id}">
+                <i class="fas fa-eye"></i>
+            </button>
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}" />
+            </div>
+            <div class="product-info">
+                <div class="product-category">${product.category}</div>
+                <h3 class="product-title">${product.name}</h3>
+                <div class="product-rating">
+                    ${getRatingStars(product.rating)}
+                    <span>${product.rating} (${product.reviews})</span>
+                </div>
+                <div class="product-price">
+                    <div class="current-price">${formatPrice(product.price)} ₽</div>
+                    ${product.oldPrice ? `<div class="old-price">${formatPrice(product.oldPrice)} ₽</div>` : ''}
+                    ${product.discount ? `<div class="discount">-${product.discount}%</div>` : ''}
+                </div>
+                <div class="product-actions">
+                    <button class="add-to-cart" data-id="${product.id}">В корзину</button>
+                    <button class="wishlist" data-id="${product.id}">
+                        <i class="${isInWishlist ? 'fas' : 'far'} fa-heart"></i>
+                    </button>
+                    <button class="compare-btn" data-id="${product.id}" title="Добавить к сравнению">
+                        <i class="${isInCompare ? 'fas' : 'far'} fa-exchange-alt"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        productsGrid.appendChild(productCard);
+    });
+    
+    // Добавляем обработчики событий для новых элементов
+    addProductEventListeners();
+}
+
+function getRatingStars(rating) {
+    let stars = '';
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    
+    for (let i = 0; i < fullStars; i++) {
+        stars += '<i class="fas fa-star"></i>';
+    }
+    
+    if (hasHalfStar) {
+        stars += '<i class="fas fa-star-half-alt"></i>';
+    }
+    
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    for (let i = 0; i < emptyStars; i++) {
+        stars += '<i class="far fa-star"></i>';
+    }
+    
+    return stars;
+}
+
+function addProductEventListeners() {
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', addToCartHandler);
+    });
+    
+    document.querySelectorAll('.wishlist').forEach(button => {
+        button.addEventListener('click', toggleWishlistHandler);
+    });
+    
+    document.querySelectorAll('.compare-btn').forEach(button => {
+        button.addEventListener('click', toggleCompareHandler);
+    });
+    
+    document.querySelectorAll('.quick-view').forEach(button => {
+        button.addEventListener('click', quickViewHandler);
+    });
+    
+    document.querySelectorAll('.product-title').forEach(title => {
+        title.addEventListener('click', productTitleHandler);
+    });
+}
+
+// ==================== КОРЗИНА ====================
+
+function initCart() {
+    updateCartCount();
+}
+
+function loadCartPage() {
+    const cartContent = document.getElementById('cartContent');
+    
+    if (cart.length === 0) {
+        cartContent.innerHTML = `
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Ваша корзина пуста</h3>
+                <p>Добавьте товары из каталога, чтобы увидеть их здесь</p>
+                <button class="btn" id="goToCatalogBtn">Перейти в каталог</button>
+            </div>
+        `;
+        
+        document.getElementById('goToCatalogBtn').addEventListener('click', () => {
+            showPage('home');
+        });
+        return;
+    }
+    
+    let totalPrice = 0;
+    let itemsCount = 0;
+    
+    const cartItemsHTML = cart.map(item => {
+        const itemTotal = item.price * item.quantity;
+        totalPrice += itemTotal;
+        itemsCount += item.quantity;
+        
+        return `
+            <div class="cart-item" data-id="${item.id}">
+                <div class="cart-item-image">
+                    <img src="${item.image}" alt="${item.name}" />
+                </div>
+                <div class="cart-item-info">
+                    <div class="cart-item-title">${item.name}</div>
+                    <div class="cart-item-category">${item.category}</div>
+                    <div class="cart-item-price">${formatPrice(item.price)} ₽</div>
+                </div>
+                <div class="cart-item-actions">
+                    <div class="quantity-controls">
+                        <button class="quantity-btn decrease-quantity" data-id="${item.id}">-</button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button class="quantity-btn increase-quantity" data-id="${item.id}">+</button>
+                    </div>
+                    <button class="remove-from-cart" data-id="${item.id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    cartContent.innerHTML = `
+        <div class="cart-container">
+            <div class="cart-items">
+                <h3>Товары в корзине (${itemsCount})</h3>
+                ${cartItemsHTML}
+            </div>
+            <div class="cart-summary">
+                <h3 class="summary-title">Сумма заказа</h3>
+                <div class="summary-row">
+                    <span>Товары (${itemsCount} шт.)</span>
+                    <span>${formatPrice(totalPrice)} ₽</span>
+                </div>
+                <div class="summary-row">
+                    <span>Доставка</span>
+                    <span>Бесплатно</span>
+                </div>
+                <div class="summary-row">
+                    <span>Скидка</span>
+                    <span>0 ₽</span>
+                </div>
+                <div class="summary-total">
+                    <span>Итого</span>
+                    <span>${formatPrice(totalPrice)} ₽</span>
+                </div>
+                <div class="promo-code">
+                    <input type="text" placeholder="Промокод" id="promoCodeInput" />
+                    <button id="applyPromoBtn">Применить</button>
+                </div>
+                <div class="summary-actions">
+                    <button class="btn" id="continueShoppingBtn">Продолжить покупки</button>
+                    <button class="btn" id="checkoutBtn" style="background: var(--success)">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Добавляем обработчики событий для корзины
+    document.querySelectorAll('.decrease-quantity').forEach(button => {
+        button.addEventListener('click', decreaseQuantityHandler);
+    });
+    
+    document.querySelectorAll('.increase-quantity').forEach(button => {
+        button.addEventListener('click', increaseQuantityHandler);
+    });
+    
+    document.querySelectorAll('.remove-from-cart').forEach(button => {
+        button.addEventListener('click', removeFromCartHandler);
+    });
+    
+    document.getElementById('continueShoppingBtn').addEventListener('click', () => {
+        showPage('home');
+    });
+    
+    document.getElementById('checkoutBtn').addEventListener('click', checkoutHandler);
+    
+    document.getElementById('applyPromoBtn').addEventListener('click', applyPromoHandler);
+}
+
+function decreaseQuantityHandler(e) {
+    const productId = parseInt(e.target.dataset.id);
+    const cartItem = cart.find(item => item.id === productId);
+    
+    if (cartItem && cartItem.quantity > 1) {
+        cartItem.quantity--;
+        saveCart();
+        updateCartCount();
+        loadCartPage();
+        showToast(`Количество уменьшено до ${cartItem.quantity}`, 'info');
+    }
+}
+
+function increaseQuantityHandler(e) {
+    const productId = parseInt(e.target.dataset.id);
+    const cartItem = cart.find(item => item.id === productId);
+    
+    if (cartItem) {
+        cartItem.quantity++;
+        saveCart();
+        updateCartCount();
+        loadCartPage();
+        showToast(`Количество увеличено до ${cartItem.quantity}`, 'info');
+    }
+}
+
+function removeFromCartHandler(e) {
+    const productId = parseInt(e.target.closest('button').dataset.id);
+    const cartItem = cart.find(item => item.id === productId);
+    
+    if (cartItem) {
+        cart = cart.filter(item => item.id !== productId);
+        saveCart();
+        updateCartCount();
+        loadCartPage();
+        showToast(`Товар "${cartItem.name}" удален из корзины`, 'info');
+    }
+}
+
+function applyPromoHandler() {
+    const promoCodeInput = document.getElementById('promoCodeInput');
+    const promoCode = promoCodeInput.value.trim().toUpperCase();
+    
+    if (promoCode === 'TECHNO10') {
+        showToast('Промокод применен! Скидка 10%', 'success');
+        promoCodeInput.value = '';
+        // Здесь можно добавить логику применения скидки
+    } else if (promoCode) {
+        showToast('Неверный промокод', 'error');
+    }
+}
+
+// ==================== ИЗБРАННОЕ ====================
+
+function initWishlist() {
+    updateWishlistCount();
+}
+
+function loadWishlistPage() {
+    const wishlistContent = document.getElementById('wishlistContent');
+    
+    if (wishlist.length === 0) {
+        wishlistContent.innerHTML = `
+            <div class="empty-wishlist">
+                <i class="fas fa-heart"></i>
+                <h3>Ваш список избранного пуст</h3>
+                <p>Добавляйте товары в избранное, чтобы вернуться к ним позже</p>
+                <button class="btn" id="goToCatalogBtn2">Перейти в каталог</button>
+            </div>
+        `;
+        
+        document.getElementById('goToCatalogBtn2').addEventListener('click', () => {
+            showPage('home');
+        });
+        return;
+    }
+    
+    wishlistContent.innerHTML = `
+        <div class="wishlist-grid">
+            ${wishlist.map(item => `
+                <div class="wishlist-item" data-id="${item.id}">
+                    <div class="wishlist-item-image">
+                        <img src="${item.image}" alt="${item.name}" />
+                        <button class="wishlist-item-remove" data-id="${item.id}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="wishlist-item-content">
+                        <h3 class="wishlist-item-title">${item.name}</h3>
+                        <div class="product-rating">
+                            ${getRatingStars(item.rating)}
+                            <span>${item.rating} (${item.reviews})</span>
+                        </div>
+                        <div class="wishlist-item-price">${formatPrice(item.price)} ₽</div>
+                        <div class="wishlist-item-actions">
+                            <button class="btn add-to-cart-from-wishlist" data-id="${item.id}">В корзину</button>
+                            <button class="btn remove-from-wishlist-page" data-id="${item.id}">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    
+    // Добавляем обработчики событий для избранного
+    document.querySelectorAll('.add-to-cart-from-wishlist').forEach(button => {
+        button.addEventListener('click', addToCartFromWishlistHandler);
+    });
+    
+    document.querySelectorAll('.remove-from-wishlist-page').forEach(button => {
+        button.addEventListener('click', removeFromWishlistPageHandler);
+    });
+    
+    document.querySelectorAll('.wishlist-item-remove').forEach(button => {
+        button.addEventListener('click', removeFromWishlistPageHandler);
+    });
+}
+
+function addToCartFromWishlistHandler(e) {
+    const productId = parseInt(e.target.dataset.id);
+    const product = products.find(p => p.id === productId);
+    
+    if (product) {
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                ...product,
+                quantity: 1
+            });
+        }
+        
+        saveCart();
+        updateCartCount();
+        showToast(`"${product.name}" добавлен в корзину!`, 'success');
+        animateCartCount();
+        
+        // Перезагружаем страницу корзины, если мы на ней
+        if (currentPage === 'cart') {
+            loadCartPage();
+        }
+    }
+}
+
+function removeFromWishlistPageHandler(e) {
+    const productId = parseInt(e.target.closest('button').dataset.id);
+    const wishlistItem = wishlist.find(item => item.id === productId);
+    
+    if (wishlistItem) {
+        wishlist = wishlist.filter(item => item.id !== productId);
+        saveWishlist();
+        updateWishlistCount();
+        loadWishlistPage();
+        showToast(`Товар "${wishlistItem.name}" удален из избранного`, 'info');
+        
+        // Обновляем иконки на главной странице
+        updateProductIcons();
+    }
+}
+
+// ==================== СРАВНЕНИЕ ====================
+
+function initCompare() {
+    updateCompareCount();
+}
+
+function loadComparePage() {
+    const compareContent = document.getElementById('compareContent');
+    
+    if (compare.length === 0) {
+        compareContent.innerHTML = `
+            <div class="empty-compare">
+                <i class="fas fa-exchange-alt"></i>
+                <h3>Список сравнения пуст</h3>
+                <p>Добавляйте товары к сравнению, чтобы увидеть их характеристики рядом</p>
+                <button class="btn" id="goToCatalogBtn3">Перейти в каталог</button>
+            </div>
+        `;
+        
+        document.getElementById('goToCatalogBtn3').addEventListener('click', () => {
+            showPage('home');
+        });
+        return;
+    }
+    
+    // Собираем все уникальные характеристики
+    const allSpecs = new Set();
+    compare.forEach(product => {
+        if (product.specs) {
+            product.specs.forEach(spec => allSpecs.add(spec.split(':')[0]));
+        }
+    });
+    
+    const specsArray = Array.from(allSpecs);
+    
+    compareContent.innerHTML = `
+        <div class="compare-table-container">
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Характеристика</th>
+                        ${compare.map(product => `
+                            <th>
+                                <div class="compare-product">
+                                    <div class="compare-product-image">
+                                        <img src="${product.image}" alt="${product.name}" />
+                                    </div>
+                                    <div class="compare-product-title">${product.name}</div>
+                                    <div class="compare-product-price">${formatPrice(product.price)} ₽</div>
+                                    <div class="compare-actions">
+                                        <button class="btn add-to-cart-from-compare" data-id="${product.id}">В корзину</button>
+                                        <button class="btn remove-from-compare-page" data-id="${product.id}">Удалить</button>
+                                    </div>
+                                </div>
+                            </th>
+                        `).join('')}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Категория</td>
+                        ${compare.map(product => `<td>${product.category}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Бренд</td>
+                        ${compare.map(product => `<td>${product.brand}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Рейтинг</td>
+                        ${compare.map(product => `<td>${getRatingStars(product.rating)} ${product.rating}</td>`).join('')}
+                    </tr>
+                    ${specsArray.map(spec => `
+                        <tr>
+                            <td>${spec}</td>
+                            ${compare.map(product => {
+                                const productSpec = product.specs?.find(s => s.includes(spec));
+                                return `<td>${productSpec ? productSpec.split(':')[1]?.trim() || productSpec : '-'}</td>`;
+                            }).join('')}
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn" id="clearCompareBtn" style="background: var(--danger)">Очистить сравнение</button>
+        </div>
+    `;
+    
+    // Добавляем обработчики событий для сравнения
+    document.querySelectorAll('.add-to-cart-from-compare').forEach(button => {
+        button.addEventListener('click', addToCartFromCompareHandler);
+    });
+    
+    document.querySelectorAll('.remove-from-compare-page').forEach(button => {
+        button.addEventListener('click', removeFromComparePageHandler);
+    });
+    
+    document.getElementById('clearCompareBtn').addEventListener('click', clearCompareHandler);
+}
+
+function addToCartFromCompareHandler(e) {
+    const productId = parseInt(e.target.dataset.id);
+    const product = products.find(p => p.id === productId);
+    
+    if (product) {
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                ...product,
+                quantity: 1
+            });
+        }
+        
+        saveCart();
+        updateCartCount();
+        showToast(`"${product.name}" добавлен в корзину!`, 'success');
+        animateCartCount();
+    }
+}
+
+function removeFromComparePageHandler(e) {
+    const productId = parseInt(e.target.dataset.id);
+    const compareItem = compare.find(item => item.id === productId);
+    
+    if (compareItem) {
+        compare = compare.filter(item => item.id !== productId);
+        saveCompare();
+        updateCompareCount();
+        loadComparePage();
+        showToast(`Товар "${compareItem.name}" удален из сравнения`, 'info');
+        
+        // Обновляем иконки на главной странице
+        updateProductIcons();
+    }
+}
+
+function clearCompareHandler() {
+    compare = [];
+    saveCompare();
+    updateCompareCount();
+    loadComparePage();
+    showToast('Список сравнения очищен', 'info');
+    
+    // Обновляем иконки на главной странице
+    updateProductIcons();
+}
+
+// ==================== FOOTER ====================
+
+function initFooter() {
+    // Обработчик подписки в футере
+    document.getElementById('footerSubscribeBtn').addEventListener('click', footerSubscribeHandler);
+    
+    // Обработчики для социальных ссылок
+    document.querySelectorAll('.social-link-footer').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const platform = this.querySelector('i').className.split(' ')[1].replace('fa-', '');
+            showToast(`Переход на ${getPlatformName(platform)}`, 'info');
+        });
+    });
+    
+    // Обработчики для ссылок в футере
+    document.querySelectorAll('.footer-links a, .footer-legal-links a, .app-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const linkText = this.textContent.trim();
+            showToast(`Ссылка "${linkText}"`, 'info');
+        });
+    });
+}
+
+function footerSubscribeHandler() {
+    const emailInput = document.getElementById('footerNewsletterEmail');
+    const email = emailInput.value.trim();
+    
+    if (!validateEmail(email)) {
+        showToast('Введите корректный email!', 'warning');
+        return;
+    }
+    
+    // Имитация отправки
+    showToast('Спасибо за подписку на новости!', 'success');
+    emailInput.value = '';
+    
+    // Сохраняем в localStorage
+    const subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers')) || [];
+    subscribers.push({ email, date: new Date().toISOString(), source: 'footer' });
+    localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+}
+
+function getPlatformName(platformClass) {
+    const platforms = {
+        'vk': 'ВКонтакте',
+        'telegram': 'Telegram',
+        'youtube': 'YouTube',
+        'instagram': 'Instagram',
+        'apple': 'App Store',
+        'google-play': 'Google Play'
+    };
+    return platforms[platformClass] || platformClass;
+}
+
+// ==================== ОБРАБОТЧИКИ СОБЫТИЙ ====================
+
+function addToCartHandler(e) {
+    const productId = parseInt(e.currentTarget.dataset.id);
+    const product = products.find(p => p.id === productId);
+    
+    if (!product) return;
+    
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            ...product,
+            quantity: 1
+        });
+    }
+    
+    saveCart();
+    updateCartCount();
+    showToast(`"${product.name}" добавлен в корзину!`, 'success');
+    
+    // Анимация кнопки
+    const button = e.currentTarget;
+    button.innerHTML = '<i class="fas fa-check"></i> Добавлено';
+    button.style.backgroundColor = '#10b981';
+    
+    setTimeout(() => {
+        button.innerHTML = 'В корзину';
+        button.style.backgroundColor = '';
+    }, 2000);
+    
+    animateCartCount();
+}
+
+function toggleWishlistHandler(e) {
+    const productId = parseInt(e.currentTarget.dataset.id);
+    const product = products.find(p => p.id === productId);
+    const icon = e.currentTarget.querySelector('i');
+    
+    if (!product) return;
+    
+    const index = wishlist.findIndex(item => item.id === productId);
+    
+    if (index === -1) {
+        wishlist.push(product);
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+        e.currentTarget.style.backgroundColor = '#fecaca';
+        e.currentTarget.style.color = '#ef4444';
+        showToast(`"${product.name}" добавлен в избранное!`, 'success');
+    } else {
+        wishlist.splice(index, 1);
+        icon.classList.remove('fas');
+        icon.classList.add('far');
+        e.currentTarget.style.backgroundColor = '';
+        e.currentTarget.style.color = '';
+        showToast(`"${product.name}" удален из избранного`, 'info');
+    }
+    
+    saveWishlist();
+    updateWishlistCount();
+    
+    // Анимация
+    e.currentTarget.style.animation = 'bounce 0.5s';
+    setTimeout(() => {
+        e.currentTarget.style.animation = '';
+    }, 500);
+}
+
+function toggleCompareHandler(e) {
+    const productId = parseInt(e.currentTarget.dataset.id);
+    const product = products.find(p => p.id === productId);
+    const icon = e.currentTarget.querySelector('i');
+    
+    if (!product) return;
+    
+    const index = compare.findIndex(item => item.id === productId);
+    
+    if (index === -1) {
+        if (compare.length >= 4) {
+            showToast('Можно сравнивать не более 4 товаров', 'warning');
+            return;
+        }
+        compare.push(product);
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+        e.currentTarget.style.backgroundColor = '#dbeafe';
+        e.currentTarget.style.color = 'var(--primary)';
+        showToast(`"${product.name}" добавлен к сравнению`, 'info');
+    } else {
+        compare.splice(index, 1);
+        icon.classList.remove('fas');
+        icon.classList.add('far');
+        e.currentTarget.style.backgroundColor = '';
+        e.currentTarget.style.color = '';
+        showToast(`"${product.name}" удален из сравнения`, 'info');
+    }
+    
+    saveCompare();
+    updateCompareCount();
+}
+
+function quickViewHandler(e) {
+    const productId = parseInt(e.currentTarget.dataset.id);
+    const product = products.find(p => p.id === productId);
+    
+    if (product) {
+        showProductModal(product);
+    }
+}
+
+function productTitleHandler(e) {
+    const productCard = e.target.closest('.product-card');
+    const productId = parseInt(productCard.dataset.id);
+    const product = products.find(p => p.id === productId);
+    
+    if (product) {
+        showProductModal(product);
+    }
+}
+
+function checkoutHandler() {
+    if (cart.length === 0) {
+        showToast('Корзина пуста!', 'warning');
+        return;
+    }
+    
+    showLoading(true);
+    setTimeout(() => {
+        showLoading(false);
+        const modalBody = document.getElementById('modalBody');
+        const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const itemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+        
+        modalBody.innerHTML = `
+            <div style="padding: 40px; text-align: center; width: 100%">
+                <div style="width: 80px; height: 80px; background: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px">
+                    <i class="fas fa-check fa-2x" style="color: white"></i>
+                </div>
+                <h2 style="margin-bottom: 20px">Заказ оформлен!</h2>
+                <p style="margin-bottom: 30px; color: var(--gray)">Номер вашего заказа: #${Math.floor(Math.random() * 10000) + 1000}</p>
+                <div style="background: #f1f5f9; padding: 20px; border-radius: 10px; margin-bottom: 30px; text-align: left">
+                    <h4 style="margin-bottom: 15px">Детали заказа:</h4>
+                    <p><strong>Сумма:</strong> ${formatPrice(totalPrice)} ₽</p>
+                    <p><strong>Товаров:</strong> ${itemsCount} шт.</p>
+                    <p><strong>Доставка:</strong> Бесплатно</p>
+                    <p><strong>Статус:</strong> В обработке</p>
+                </div>
+                <p style="color: var(--gray); margin-bottom: 30px">Наш менеджер свяжется с вами в течение 15 минут для подтверждения заказа</p>
+                <button class="btn" id="continueShoppingBtnModal" style="width: 100%">Продолжить покупки</button>
+            </div>
+        `;
+        
+        document.getElementById('productModal').style.display = 'flex';
+        
+        document.getElementById('continueShoppingBtnModal').addEventListener('click', () => {
+            cart = [];
+            saveCart();
+            updateCartCount();
+            closeModal();
+            showToast('Заказ успешно оформлен!', 'success');
+            loadCartPage();
+        });
+    }, 1500);
+}
+
+// ==================== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ====================
+
+function updateCounters() {
+    updateCartCount();
+    updateWishlistCount();
+    updateCompareCount();
+}
+
+function updateCartCount() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cartCount').textContent = totalItems;
+}
+
+function updateWishlistCount() {
+    document.getElementById('wishlistCount').textContent = wishlist.length;
+}
+
+function updateCompareCount() {
+    document.getElementById('compareCount').textContent = compare.length;
+}
+
+function updateProductIcons() {
+    // Обновляем иконки на главной странице
+    document.querySelectorAll('.wishlist').forEach(button => {
+        const productId = parseInt(button.dataset.id);
+        const isInWishlist = wishlist.some(item => item.id === productId);
+        const icon = button.querySelector('i');
+        
+        if (isInWishlist) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+            button.style.backgroundColor = '#fecaca';
+            button.style.color = '#ef4444';
+        } else {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+            button.style.backgroundColor = '';
+            button.style.color = '';
+        }
+    });
+    
+    document.querySelectorAll('.compare-btn').forEach(button => {
+        const productId = parseInt(button.dataset.id);
+        const isInCompare = compare.some(item => item.id === productId);
+        const icon = button.querySelector('i');
+        
+        if (isInCompare) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+            button.style.backgroundColor = '#dbeafe';
+            button.style.color = 'var(--primary)';
+        } else {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+            button.style.backgroundColor = '';
+            button.style.color = '';
+        }
+    });
+}
+
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function saveWishlist() {
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+}
+
+function saveCompare() {
+    localStorage.setItem('compare', JSON.stringify(compare));
+}
+
+function showProductModal(product) {
+    const modalBody = document.getElementById('modalBody');
+    const isInWishlist = wishlist.some(item => item.id === product.id);
+    const isInCompare = compare.some(item => item.id === product.id);
+    
+    modalBody.innerHTML = `
+        <div class="modal-image">
+            <img src="${product.image}" alt="${product.name}" />
+        </div>
+        <div class="modal-info">
+            <div class="product-badge">${product.badge}</div>
+            <h2 class="modal-title">${product.name}</h2>
+            <div class="product-category">${product.category} • ${product.brand}</div>
+            
+            <div class="product-rating" style="margin: 15px 0">
+                ${getRatingStars(product.rating)}
+                <span>${product.rating} (${product.reviews} отзывов)</span>
+            </div>
+            
+            <div class="modal-price">${formatPrice(product.price)} ₽</div>
+            
+            ${product.oldPrice ? `
+                <div style="margin-bottom: 20px;">
+                    <span style="text-decoration: line-through; color: var(--gray)">${formatPrice(product.oldPrice)} ₽</span>
+                    <span style="color: var(--success); font-weight: 600; margin-left: 10px">Экономия ${product.discount}%</span>
+                </div>
+            ` : ''}
+            
+            <p style="margin-bottom: 30px; color: var(--gray); line-height: 1.6">${product.description}</p>
+            
+            <div style="margin-bottom: 30px">
+                <h4 style="margin-bottom: 10px">Характеристики:</h4>
+                <ul style="color: var(--gray); list-style: none; padding-left: 0">
+                    ${product.specs.map(spec => `
+                        <li style="margin-bottom: 5px"><i class="fas fa-check" style="color: var(--success); margin-right: 10px"></i> ${spec}</li>
+                    `).join('')}
+                </ul>
+            </div>
+            
+            <div style="display: flex; gap: 15px; margin-top: 30px">
+                <button class="btn" style="flex: 2" id="modalAddToCart" data-id="${product.id}">
+                    Добавить в корзину
+                </button>
+                <button class="wishlist" style="width: 50px" id="modalWishlist" data-id="${product.id}">
+                    <i class="${isInWishlist ? 'fas' : 'far'} fa-heart"></i>
+                </button>
+                <button class="compare-btn" style="width: 50px" id="modalCompare" data-id="${product.id}" title="Сравнить">
+                    <i class="${isInCompare ? 'fas' : 'far'} fa-exchange-alt"></i>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('productModal').style.display = 'flex';
+    
+    document.getElementById('modalAddToCart').addEventListener('click', function() {
+        const productId = parseInt(this.dataset.id);
+        const product = products.find(p => p.id === productId);
+        
+        if (product) {
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            updateCartCount();
+            showToast(`"${product.name}" добавлен в корзину!`, 'success');
+            animateCartCount();
+        }
+    });
+    
+    document.getElementById('modalWishlist').addEventListener('click', function() {
+        const productId = parseInt(this.dataset.id);
+        const product = products.find(p => p.id === productId);
+        const icon = this.querySelector('i');
+        
+        if (product) {
+            const index = wishlist.findIndex(item => item.id === productId);
+            
+            if (index === -1) {
+                wishlist.push(product);
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                showToast(`"${product.name}" добавлен в избранное!`, 'success');
+            } else {
+                wishlist.splice(index, 1);
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                showToast(`"${product.name}" удален из избранного`, 'info');
+            }
+            
+            saveWishlist();
+            updateWishlistCount();
+            updateProductIcons();
+        }
+    });
+    
+    document.getElementById('modalCompare').addEventListener('click', function() {
+        const productId = parseInt(this.dataset.id);
+        const product = products.find(p => p.id === productId);
+        const icon = this.querySelector('i');
+        
+        if (product) {
+            const index = compare.findIndex(item => item.id === productId);
+            
+            if (index === -1) {
+                if (compare.length >= 4) {
+                    showToast('Можно сравнивать не более 4 товаров', 'warning');
+                    return;
+                }
+                compare.push(product);
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                showToast(`"${product.name}" добавлен к сравнению`, 'info');
+            } else {
+                compare.splice(index, 1);
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                showToast(`"${product.name}" удален из сравнения`, 'info');
+            }
+            
+            saveCompare();
+            updateCompareCount();
+            updateProductIcons();
+        }
+    });
+}
+
+// ==================== ИСПРАВЛЕННАЯ КАРУСЕЛЬ ====================
+function initHeroSlider() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    
+    // Убедимся, что первый слайд активен
+    if (!slides[currentSlide]?.classList.contains('active')) {
+        showSlide(0);
+    }
+    
+    function showSlide(index) {
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+            slide.style.position = 'absolute';
+            slide.style.opacity = '0';
+        });
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        slides[index].classList.add('active');
+        slides[index].style.position = 'relative';
+        slides[index].style.opacity = '1';
+        dots[index].classList.add('active');
+        
+        currentSlide = index;
+    }
+    
+    function nextSlide() {
+        let nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
+    }
+    
+    function prevSlide() {
+        let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prevIndex);
+    }
+    
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+            resetSlideInterval();
+        });
+    });
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetSlideInterval();
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetSlideInterval();
+        });
+    }
+    
+    // Автоматическое переключение
+    slideInterval = setInterval(nextSlide, 5000);
+    
+    // Остановка при наведении
+    const heroSlider = document.getElementById('heroSlider');
+    heroSlider.addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
+    });
+    
+    heroSlider.addEventListener('mouseleave', () => {
+        resetSlideInterval();
+    });
+}
+
+function resetSlideInterval() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(() => {
+        let nextIndex = (currentSlide + 1) % document.querySelectorAll('.hero-slide').length;
+        showSlide(nextIndex);
+    }, 5000);
+}
+
+// Глобальная функция showSlide для доступа из других функций
+function showSlide(index) {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    
+    slides.forEach(slide => {
+        slide.classList.remove('active');
+        slide.style.position = 'absolute';
+        slide.style.opacity = '0';
+    });
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    slides[index].classList.add('active');
+    slides[index].style.position = 'relative';
+    slides[index].style.opacity = '1';
+    dots[index].classList.add('active');
+    
+    currentSlide = index;
+}
+
+// ==================== ОСТАЛЬНЫЕ ФУНКЦИИ ====================
+
+function initTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark);
+        themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        showToast(isDark ? 'Темная тема включена' : 'Светлая тема включена', 'info');
+    });
+}
+
+function initEventListeners() {
+    // Поиск
+    document.getElementById('searchInput').addEventListener('input', searchHandler);
+    document.getElementById('searchBtn').addEventListener('click', searchHandler);
+    
+    // Навигация
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pageName = this.dataset.page;
+            showPage(pageName);
+        });
+    });
+    
+    // Иконки в хедере
+    document.getElementById('cartBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('cart');
+    });
+    
+    document.getElementById('wishlistBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('wishlist');
+    });
+    
+    document.getElementById('compareBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage('compare');
+    });
+    
+    // Логотип
+    document.getElementById('logo').addEventListener('click', () => {
+        showPage('home');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Модальное окно
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('productModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+    
+    // Кнопки входа и регистрации
+    document.getElementById('loginBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        showLoginModal();
+    });
+    
+    document.getElementById('registerBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        showRegisterModal();
+    });
+    
+    // Back to top
+    document.getElementById('backToTop').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+function initScrollEffects() {
+    window.addEventListener('scroll', () => {
+        const backToTop = document.getElementById('backToTop');
+        if (window.scrollY > 300) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+        
+        // Параллакс эффект
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * 0.5;
+            hero.style.backgroundPosition = `center ${rate}px`;
+        }
+    });
+}
+
+function searchHandler() {
+    const input = document.getElementById('searchInput');
+    const query = input.value.toLowerCase();
+    const resultsContainer = document.getElementById('searchResults');
+    
+    if (query.length < 2) {
+        resultsContainer.style.display = 'none';
+        return;
+    }
+    
+    const filtered = products.filter(product => 
+        product.name.toLowerCase().includes(query) ||
+        product.category.toLowerCase().includes(query) ||
+        product.brand.toLowerCase().includes(query)
+    );
+    
+    if (filtered.length > 0) {
+        resultsContainer.innerHTML = filtered.slice(0, 5).map(product => `
+            <div class="search-result-item" data-id="${product.id}">
+                <img src="${product.image}" alt="${product.name}" />
+                <div>
+                    <div style="font-weight: 600">${product.name}</div>
+                    <div style="font-size: 0.9rem; color: var(--gray)">${formatPrice(product.price)} ₽</div>
+                </div>
+            </div>
+        `).join('');
+        
+        resultsContainer.style.display = 'block';
+        
+        document.querySelectorAll('.search-result-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const productId = parseInt(this.dataset.id);
+                const product = products.find(p => p.id === productId);
+                if (product) {
+                    showProductModal(product);
+                    resultsContainer.style.display = 'none';
+                    input.value = '';
+                }
+            });
+        });
+    } else {
+        resultsContainer.innerHTML = '<div class="search-result-item">Ничего не найдено</div>';
+        resultsContainer.style.display = 'block';
+    }
+}
+
+function showLoginModal() {
+    const modalBody = document.getElementById('modalBody');
+    
+    modalBody.innerHTML = `
+        <div style="padding: 40px; text-align: center; width: 100%">
+            <h2 style="margin-bottom: 30px">Вход в аккаунт</h2>
+            
+            <form id="loginForm" style="max-width: 400px; margin: 0 auto">
+                <div style="margin-bottom: 20px; text-align: left">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500">Email</label>
+                    <input type="email" required style="width: 100%; padding: 12px; border-radius: 5px; border: 2px solid var(--light-gray)" />
+                </div>
+                
+                <div style="margin-bottom: 20px; text-align: left">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500">Пароль</label>
+                    <input type="password" required style="width: 100%; padding: 12px; border-radius: 5px; border: 2px solid var(--light-gray)" />
+                </div>
+                
+                <button type="submit" class="btn" style="width: 100%; margin-bottom: 20px">Войти</button>
+                
+                <div style="color: var(--gray); font-size: 0.9rem">
+                    Нет аккаунта? <a href="#" style="color: var(--primary); cursor: pointer" id="switchToRegister">Зарегистрироваться</a>
+                </div>
+            </form>
+        </div>
+    `;        
+    
+    document.getElementById('productModal').style.display = 'flex';
+    
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        showToast('Вход выполнен успешно!', 'success');
+        setTimeout(closeModal, 1500);
+    });
+    
+    document.getElementById('switchToRegister').addEventListener('click', function(e) {
+        e.preventDefault();
+        showRegisterModal();
+    });
+}
+
+function showRegisterModal() {
+    const modalBody = document.getElementById('modalBody');
+    
+    modalBody.innerHTML = `
+        <div style="padding: 40px; text-align: center; width: 100%">
+            <h2 style="margin-bottom: 30px">Регистрация</h2>
+            
+            <form id="registerForm" style="max-width: 400px; margin: 0 auto">
+                <div style="margin-bottom: 20px; text-align: left">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500">Имя</label>
+                    <input type="text" required style="width: 100%; padding: 12px; border-radius: 5px; border: 2px solid var(--light-gray)" />
+                </div>
+                
+                <div style="margin-bottom: 20px; text-align: left">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500">Email</label>
+                    <input type="email" required style="width: 100%; padding: 12px; border-radius: 5px; border: 2px solid var(--light-gray)" />
+                </div>
+                
+                <div style="margin-bottom: 20px; text-align: left">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 500">Пароль</label>
+                    <input type="password" required style="width: 100%; padding: 12px; border-radius: 5px; border: 2px solid var(--light-gray)" />
+                </div>
+                
+                <button type="submit" class="btn" style="width: 100%; margin-bottom: 20px">Зарегистрироваться</button>
+                
+                <div style="color: var(--gray); font-size: 0.9rem">
+                    Уже есть аккаунт? <a href="#" style="color: var(--primary); cursor: pointer" id="switchToLogin">Войти</a>
+                </div>
+            </form>
+        </div>
+    `;
+    
+    document.getElementById('productModal').style.display = 'flex';
+    
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        showToast('Регистрация успешна!', 'success');
+        setTimeout(closeModal, 1500);
+    });
+    
+    document.getElementById('switchToLogin').addEventListener('click', function(e) {
+        e.preventDefault();
+        showLoginModal();
+    });
+}
+
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    const toastIcon = toast.querySelector('.toast-icon');
+    const toastTitle = toast.querySelector('.toast-title');
+    
+    switch(type) {
+        case 'success':
+            toastIcon.style.backgroundColor = '#10b981';
+            toastIcon.innerHTML = '<i class="fas fa-check"></i>';
+            break;
+        case 'error':
+            toastIcon.style.backgroundColor = '#ef4444';
+            toastIcon.innerHTML = '<i class="fas fa-times"></i>';
+            break;
+        case 'info':
+            toastIcon.style.backgroundColor = '#3b82f6';
+            toastIcon.innerHTML = '<i class="fas fa-info-circle"></i>';
+            break;
+        case 'warning':
+            toastIcon.style.backgroundColor = '#f59e0b';
+            toastIcon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
+            break;
+    }
+    
+    toastTitle.textContent = message;
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+function showLoading(show) {
+    const spinner = document.getElementById('loadingSpinner');
+    if (show) {
+        spinner.style.display = 'block';
+    } else {
+        spinner.style.display = 'none';
+    }
+}
+
+function animateCartCount() {
+    const cartCount = document.getElementById('cartCount');
+    cartCount.style.transform = 'scale(1.3)';
+    setTimeout(() => {
+        cartCount.style.transform = 'scale(1)';
+    }, 300);
+}
+
+function formatPrice(price) {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function closeModal() {
+    document.getElementById('productModal').style.display = 'none';
+}
+
+// Закрываем результаты поиска при клике вне их
+document.addEventListener('click', function(e) {
+    const searchResults = document.getElementById('searchResults');
+    const searchInput = document.getElementById('searchInput');
+    
+    if (searchResults.style.display === 'block' && 
+        !searchResults.contains(e.target) && 
+        !searchInput.contains(e.target)) {
+        searchResults.style.display = 'none';
+    }
+});
+
+// Анимация при загрузке
+window.addEventListener('load', function() {
+    document.querySelectorAll('.fade-in').forEach((element, index) => {
+        element.style.animationDelay = `${index * 0.1}s`;
+    });
+});
+</script>
+</body>
+</html>
